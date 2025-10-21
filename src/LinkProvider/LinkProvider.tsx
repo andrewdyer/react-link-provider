@@ -9,7 +9,7 @@ import type {
   GenericProps,
 } from '../types';
 
-export type ProviderProps<T extends GenericProps = ComponentPropsDefault> = {
+export type LinkProviderProps<T extends GenericProps = ComponentPropsDefault> = {
   LinkComponent: ComponentType<T>;
   children: React.ReactNode;
 };
@@ -17,7 +17,7 @@ export type ProviderProps<T extends GenericProps = ComponentPropsDefault> = {
 const LinkProvider = <T extends GenericProps = ComponentPropsDefault>({
   LinkComponent,
   children,
-}: ProviderProps<T>) => {
+}: LinkProviderProps<T>) => {
   const value = React.useMemo<ContextProps<T>>(
     () => ({ LinkComponent }),
     [LinkComponent]
