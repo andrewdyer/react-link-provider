@@ -9,10 +9,11 @@ import type {
   GenericProps,
 } from '../types';
 
-export type LinkProviderProps<T extends GenericProps = ComponentPropsDefault> = {
-  LinkComponent: ComponentType<T>;
-  children: React.ReactNode;
-};
+export type LinkProviderProps<T extends GenericProps = ComponentPropsDefault> =
+  {
+    LinkComponent: ComponentType<T>;
+    children: React.ReactNode;
+  };
 
 const LinkProvider = <T extends GenericProps = ComponentPropsDefault>({
   LinkComponent,
