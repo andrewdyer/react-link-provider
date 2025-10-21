@@ -82,10 +82,10 @@ Use the following commands as needed to build and preview the project:
 Use Yalc to test this package locally in other projects without publishing it to the npm registry.
 
 1. Install Yalc globally using `npm install yalc -g`.
-2. In the target project's directory, add this package with `yalc add @your-scope/react-package-template`.
+2. In the target project's directory, add this package with `yalc add @your-scope/react-link-provider`.
 3. Publish changes to the local Yalc store by running `npm run yalc:publish` in this package's directory.
 4. Push updates to the target project with `npm run yalc:push`, which notifies the target project of the latest changes.
-5. Alternatively, manually update the package in the target project with `yalc update @your-scope/react-package-template`.
+5. Alternatively, manually update the package in the target project with `yalc update @your-scope/react-link-provider`.
 
 Follow these steps to ensure your changes work as expected before submitting them.
 

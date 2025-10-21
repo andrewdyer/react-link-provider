@@ -20,7 +20,7 @@ export default defineConfig({
     emptyOutDir: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'react-package-template',
+      name: 'ReactLinkProvider',
       fileName: (format) => `index.${format}.js`,
       formats: ['es', 'cjs', 'umd'],
     },
@@ -39,7 +39,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['src/setupTests.ts'],
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
-        typecheck: {
+    typecheck: {
       tsconfig: './tsconfig.test.json',
     },
     coverage: {
