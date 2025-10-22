@@ -1,5 +1,6 @@
 {
   "name": "react-link-provider",
+  "license": "MIT",
   "version": "0.2.0-alpha.1",
   "type": "module",
   "author": "Andrew Dyer (https://github.com/andrewdyer)",
