@@ -1,6 +1,6 @@
 # 🔗 React Link Provider
 
-A lightweight React utility for providing a consistent, framework-agnostic link component across your app.
+A lightweight utility for providing a consistent, framework-agnostic link component across React applications.
 
 ## ⚖️ License
 
@@ -17,20 +17,20 @@ For example:
 
 - One app might use react-router-dom, while another uses Next.js or Remix.
 - Some UI components might need to work without any router (e.g., in Storybook or documentation).
-- Your design system or shared component library might not want a hard dependency on any routing library.
-- You want your link logic to work seamlessly with server-side rendering (SSR) and theming solutions.
+- Design systems or shared component libraries might not require a hard dependency on any routing library.
+- Link logic may need to work seamlessly with server-side rendering (SSR) and theming solutions.
 
-This library solves this by:
+This library solves these challenges by:
 
-1. Allowing you to inject any link component (like Link from your router) at the top of your app.
-2. Providing a simple useLink() hook that always returns the correct link component in context.
+1. Enabling injection of any link component (such as Link from a router) at the top level of the application.
+2. Providing a simple useLink() hook that always returns the correct link component from context.
 3. Gracefully falling back to a standard <a> element when no router is used.
 
-This makes it ideal for shared UI libraries, SSR environments, and apps that need routing flexibility without coupling to a specific framework.
+This approach is ideal for shared UI libraries, SSR environments, and applications that require routing flexibility without coupling to a specific framework.
 
 ## 📥 Installation
 
-Install the package using your preferred dependency management tool:
+Install the package using any preferred dependency management tool:
 
 ```bash
 # npm
@@ -45,7 +45,7 @@ yarn add react-link-provider
 
 ## 🚀 Getting Started
 
-Wrap your application in the `<LinkProvider>` and pass a `LinkComponent` — for example, from `react-router-dom`:
+Wrap the application in `<LinkProvider>` and pass a `LinkComponent` — for example, from `react-router-dom`:
 
 ```tsx
 import { StrictMode } from 'react';
@@ -68,7 +68,7 @@ createRoot(document.getElementById('root')!).render(
 
 ## 📖 Usage
 
-The `useLink` hook gives you access to the `LinkComponent` set in context. If no provider is defined, it falls back to a native `<a>` element.
+The `useLink` hook provides access to the `LinkComponent` set in context. If no provider is defined, it falls back to a native `<a>` element.
 
 ```tsx
 import React from 'react';
