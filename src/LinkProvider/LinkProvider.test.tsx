@@ -11,8 +11,8 @@ type DummyLinkProps = {
   to: string;
 };
 
-const DummyLink = ({ children, to }: DummyLinkProps) => (
-  <a href={to} data-testid="dummy-link">
+const DummyLink = ({ children, to, ...props }: DummyLinkProps) => (
+  <a href={to} data-testid="dummy-link" {...props}>
     {children}
   </a>
 );
@@ -25,7 +25,11 @@ type TestComponentProps = {
 const TestComponent = ({ to, children }: TestComponentProps) => {
   const Link = useLink();
 
-  return <Link to={to}>{children}</Link>;
+  return (
+    <Link to={to} className="test-link">
+      {children}
+    </Link>
+  );
 };
 
 describe('LinkProvider', () => {
@@ -80,5 +84,15 @@ describe('LinkProvider', () => {
       'data-testid',
       'another-link'
     );
+  });
+
+  it('should pass className prop to the link component', () => {
+    render(
+      <LinkProvider LinkComponent={DummyLink}>
+        <TestComponent to="/profile">Profile</TestComponent>
+      </LinkProvider>
+    );
+
+    expect(screen.getByText('Profile')).toHaveClass('test-link');
   });
 });

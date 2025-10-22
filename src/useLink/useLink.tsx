@@ -2,17 +2,13 @@ import React, { type ComponentType } from 'react';
 
 import { LinkContext } from '../LinkContext';
 
-const useLink = (): ComponentType<{
-  to: string;
-  children: React.ReactNode;
-}> => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useLink = (): ComponentType<{ to: string } & Record<string, any>> => {
   const context = React.useContext(LinkContext);
 
   if (context) return context.LinkComponent;
 
-  return ({ to, ...props }: { to: string; children: React.ReactNode }) => (
-    <a {...props} href={to} />
-  );
+  return ({ to, ...props }: { to: string }) => <a {...props} href={to} />;
 };
 
 export default useLink;

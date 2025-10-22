@@ -1,7 +1,8 @@
 import { createContext } from 'react';
 
 export type LinkContextValue = {
-  LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  LinkComponent: React.ComponentType<any>;
 };
 
 const LinkContext = createContext<LinkContextValue | undefined>(undefined);
