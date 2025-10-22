@@ -23,7 +23,7 @@ type TestComponentProps = {
 };
 
 const TestComponent = ({ to, children }: TestComponentProps) => {
-  const Link = useLink<{ to: string; children: React.ReactNode }>();
+  const Link = useLink();
 
   return <Link to={to}>{children}</Link>;
 };

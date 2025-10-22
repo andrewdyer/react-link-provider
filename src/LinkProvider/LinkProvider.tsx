@@ -1,18 +1,15 @@
-import React from 'react';
+import { type ReactNode, useMemo } from 'react';
 
 import { LinkContext } from '../LinkContext';
-import type { LinkComponent, LinkContextValue } from '../types';
+import type { LinkComponent } from '../types';
 
 export type LinkProviderProps = {
   LinkComponent: LinkComponent;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const LinkProvider = ({ LinkComponent, children }: LinkProviderProps) => {
-  const value = React.useMemo<LinkContextValue>(
-    () => ({ LinkComponent }),
-    [LinkComponent]
-  );
+  const value = useMemo(() => ({ LinkComponent }), [LinkComponent]);
 
   return <LinkContext.Provider value={value}>{children}</LinkContext.Provider>;
 };

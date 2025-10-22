@@ -1,9 +1,9 @@
-import React from 'react';
+import { createContext } from 'react';
 
-import type { LinkContextValue } from '../types';
+export type LinkContextValue = {
+  LinkComponent: React.ComponentType<{ to: string; children: React.ReactNode }>;
+};
 
-const LinkContext = React.createContext<LinkContextValue | undefined>(
-  undefined
-);
+const LinkContext = createContext<LinkContextValue | undefined>(undefined);
 
 export default LinkContext;

@@ -1,11 +1,4 @@
-import React from 'react';
+import { type ComponentType } from 'react';
 
-export type LinkComponent = React.ComponentType<Record<string, unknown>>;
-
-export type LinkContextValue = {
-  LinkComponent: LinkComponent;
-};
-
-export type ComponentPropsDefault = Record<string, unknown>;
-
-export type AnyLinkComponent = LinkComponent;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type LinkComponent = ComponentType<any>;
