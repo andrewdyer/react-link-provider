@@ -2,6 +2,7 @@
   "name": "react-link-provider",
   "version": "0.2.0-alpha.1",
   "type": "module",
+  "author": "Andrew Dyer (https://github.com/andrewdyer)",
   "repository": {
     "type": "git",
     "url": "https://github.com/andrewdyer/react-link-provider.git"
