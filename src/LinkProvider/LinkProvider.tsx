@@ -1,34 +1,20 @@
 import React from 'react';
 
 import { LinkContext } from '../LinkContext';
-import type {
-  ComponentPropsDefault,
-  ComponentType,
-  ContextDefault,
-  ContextProps,
-  GenericProps,
-} from '../types';
+import type { LinkComponent, LinkContextValue } from '../types';
 
-export type LinkProviderProps<T extends GenericProps = ComponentPropsDefault> =
-  {
-    LinkComponent: ComponentType<T>;
-    children: React.ReactNode;
-  };
+export type LinkProviderProps = {
+  LinkComponent: LinkComponent;
+  children: React.ReactNode;
+};
 
-const LinkProvider = <T extends GenericProps = ComponentPropsDefault>({
-  LinkComponent,
-  children,
-}: LinkProviderProps<T>) => {
-  const value = React.useMemo<ContextProps<T>>(
+const LinkProvider = ({ LinkComponent, children }: LinkProviderProps) => {
+  const value = React.useMemo<LinkContextValue>(
     () => ({ LinkComponent }),
     [LinkComponent]
   );
 
-  return (
-    <LinkContext.Provider value={value as ContextDefault}>
-      {children}
-    </LinkContext.Provider>
-  );
+  return <LinkContext.Provider value={value}>{children}</LinkContext.Provider>;
 };
 
 export default LinkProvider;

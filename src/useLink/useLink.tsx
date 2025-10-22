@@ -1,18 +1,16 @@
 import React from 'react';
 
 import { LinkContext } from '../LinkContext';
-import type { ComponentPropsDefault, ComponentType } from '../types';
+import type { LinkComponent } from '../types';
 
-const useLink = <
-  TProps extends ComponentPropsDefault = ComponentPropsDefault,
->(): ComponentType<TProps> => {
+const useLink = (): LinkComponent => {
   const context = React.useContext(LinkContext);
 
-  if (context) return context.LinkComponent as ComponentType<TProps>;
+  if (context) return context.LinkComponent;
 
-  return (({ to, ...props }: { to?: string } & ComponentPropsDefault) => (
+  return ({ to, ...props }: { to?: string; [key: string]: unknown }) => (
     <a {...props} href={to} />
-  )) as unknown as ComponentType<TProps>;
+  );
 };
 
 export default useLink;
