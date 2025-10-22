@@ -22,9 +22,9 @@ For example:
 
 This library solves these challenges by:
 
-1. Enabling injection of any link component (such as Link from a router) at the top level of the application.
-2. Providing a simple useLink() hook that always returns the correct link component from context.
-3. Gracefully falling back to a standard <a> element when no router is used.
+1. Enabling injection of any link component at the top level of the application.
+2. Providing a simple hook that always returns the correct link component from context.
+3. Gracefully falling back to a standard anchor element when no router is used.
 
 This approach is ideal for shared UI libraries, SSR environments, and applications that require routing flexibility without coupling to a specific framework.
 
