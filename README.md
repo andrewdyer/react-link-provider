@@ -10,6 +10,24 @@ Licensed under the [MIT license](https://opensource.org/licenses/MIT) and is fre
 
 The `react-link-provider` library is a lightweight, framework-agnostic context for managing link behavior across your React app. It provides a unified way for components to render consistent navigation elements—no matter which routing library you use—while remaining fully compatible with server-side rendering, theming, and flexible context composition.
 
+## 💡 Rationale
+
+In many React applications, components need to render links — but not every project uses the same routing system.
+For example:
+
+- One app might use react-router-dom, while another uses Next.js or Remix.
+- Some UI components might need to work without any router (e.g., in Storybook or documentation).
+- Your design system or shared component library might not want a hard dependency on any routing library.
+- You want your link logic to work seamlessly with server-side rendering (SSR) and theming solutions.
+
+This library solves this by:
+
+1. Allowing you to inject any link component (like Link from your router) at the top of your app.
+2. Providing a simple useLink() hook that always returns the correct link component in context.
+3. Gracefully falling back to a standard <a> element when no router is used.
+
+This makes it ideal for shared UI libraries, SSR environments, and apps that need routing flexibility without coupling to a specific framework.
+
 ## 📥 Installation
 
 Install the package using your preferred dependency management tool:
