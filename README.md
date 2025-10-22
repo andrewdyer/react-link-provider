@@ -66,12 +66,45 @@ createRoot(document.getElementById('root')!).render(
 );
 ```
 
+Or a custom React component can be used as the link. This allows integration with design system links, styled anchor tags, or any other link component with a compatible props shape:
+
+```tsx
+import { ReactNode } from 'react';
+
+type CustomLinkProps = {
+  to: string;
+  children: ReactNode;
+  // Add any other props your design system requires
+};
+
+export const CustomLink = ({ to, children, ...rest }: CustomLinkProps) => {
+  return (
+    <a
+      href={to}
+      style={{ color: 'red', textDecoration: 'underline' }}
+      {...rest}
+    >
+      {children}
+    </a>
+  );
+};
+```
+
+The custom component can then be provided via `<LinkProvider>`:
+
+```tsx
+<LinkProvider LinkComponent={CustomLink}>
+  <App />
+</LinkProvider>
+```
+
+This setup works with any compatible React component, including routing library links, custom UI kit components, or simple styled anchor elements.
+
 ## 📖 Usage
 
 The `useLink` hook provides access to the `LinkComponent` set in context. If no provider is defined, it falls back to a native `<a>` element.
 
 ```tsx
-import React from 'react';
 import { useLink } from 'react-link-provider';
 import { Route, Routes } from 'react-router-dom';
 
