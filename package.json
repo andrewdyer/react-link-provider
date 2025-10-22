@@ -2,7 +2,7 @@
   "name": "react-link-provider",
   "description": "A lightweight utility for providing a consistent, framework-agnostic link component across React applications.",
   "license": "MIT",
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-alpha.3",
   "type": "module",
   "author": "Andrew Dyer (https://github.com/andrewdyer)",
   "repository": {
