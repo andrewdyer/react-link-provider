@@ -10,11 +10,11 @@ Licensed under the [MIT license](https://opensource.org/licenses/MIT) and is fre
 
 ## ✨ Introduction
 
-The `react-link-provider` library is a lightweight, framework-agnostic context for managing link behavior across your React app. It provides a unified way for components to render consistent navigation elements—no matter which routing library you use—while remaining fully compatible with server-side rendering, theming, and flexible context composition.
+The `react-link-provider` library is a lightweight, framework-agnostic context for managing link behavior across React apps. It provides a unified way for components to render consistent navigation elements, no matter which routing library is used, while remaining fully compatible with server-side rendering, theming, and flexible context composition.
 
 > **⚠️ Note:**  
 > This package is currently in alpha (`0.3.0`) and the API may change.  
-> Feedback and bug reports are welcome. For production use, please test thoroughly and pin your dependency version.
+> Feedback and bug reports are welcome. For production use, thorough testing and dependency version pinning are recommended.
 
 ## 💡 Rationale
 
@@ -80,7 +80,7 @@ import { ReactNode } from 'react';
 type CustomLinkProps = {
   to: string;
   children: ReactNode;
-  // Add any other props your design system requires
+  // Add any other props required by the design system
 };
 
 export const CustomLink = ({ to, children, ...rest }: CustomLinkProps) => {
