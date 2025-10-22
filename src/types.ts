@@ -1,19 +1,11 @@
 import React from 'react';
 
-export type ComponentPropsDefault = Record<string, unknown>;
+export type LinkComponent = React.ComponentType<Record<string, unknown>>;
 
-export type ComponentType<
-  TProps extends ComponentPropsDefault = ComponentPropsDefault,
-> = React.ComponentType<TProps>;
-
-export type ContextProps<
-  TProps extends ComponentPropsDefault = ComponentPropsDefault,
-> = {
-  LinkComponent: ComponentType<TProps>;
+export type LinkContextValue = {
+  LinkComponent: LinkComponent;
 };
 
-export type ContextDefault = ContextProps<ComponentPropsDefault>;
+export type ComponentPropsDefault = Record<string, unknown>;
 
-export type GenericProps<
-  T extends ComponentPropsDefault = ComponentPropsDefault,
-> = T;
+export type AnyLinkComponent = LinkComponent;
