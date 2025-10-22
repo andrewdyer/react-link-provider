@@ -1,7 +1,14 @@
 {
   "name": "react-link-provider",
-  "version": "0.2.0-alpha.1",
+  "description": "A lightweight React utility for providing a consistent, framework-agnostic link component across your app.",
+  "license": "MIT",
+  "version": "0.2.0-alpha.2",
   "type": "module",
+  "author": "Andrew Dyer (https://github.com/andrewdyer)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewdyer/react-link-provider.git"
+  },
   "main": "./dist/index.cjs.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
