@@ -1,4 +1,4 @@
-![React Link Provider](https://raw.githubusercontent.com/andrewdyer/public-assets/refs/heads/main/images/covers/react-link-provider.png)
+![React Link Provider](https://public-assets.andrewdyer.rocks/images/covers/react-link-provider.png)
 
 # 🔗 React Link Provider
 
