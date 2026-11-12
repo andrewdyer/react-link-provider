@@ -1,147 +1,115 @@
-![React Link Provider](https://public-assets.andrewdyer.rocks/images/covers/react-link-provider.png)
+# React Link Provider
 
-# 🔗 React Link Provider
+A link component library for React applications that injects any router or custom link through context, with a native anchor fallback.
 
-A lightweight utility for providing a consistent, framework-agnostic link component across React applications.
+## Introduction
 
-## ⚖️ License
+This library decouples components from any particular routing solution by supplying the link component through React context. The application registers its link component once at the root, and components retrieve it with a hook that always returns something renderable. When no provider is present, the hook falls back to a native anchor that maps the destination to its href, which keeps shared UI libraries, Storybook stories and server-rendered pages free of a hard router dependency.
 
-Licensed under the [MIT license](https://opensource.org/licenses/MIT) and is free for private or commercial projects.
+## Prerequisites
 
-## ✨ Introduction
+- **[React](https://react.dev/)**: Version 19.2 or later, together with React DOM, installed as peer dependencies.
+- **[Node.js](https://nodejs.org/)**: Version 24.19.0 or later, as specified by the package `engines` field.
 
-The `react-link-provider` library is a lightweight, framework-agnostic context for managing link behavior across React apps. It provides a unified way for components to render consistent navigation elements, no matter which routing library is used, while remaining fully compatible with server-side rendering, theming, and flexible context composition.
-
-> **⚠️ Note:**  
-> This package is currently in alpha (`0.3.0`) and the API may change.  
-> Feedback and bug reports are welcome. For production use, thorough testing and dependency version pinning are recommended.
-
-## 💡 Rationale
-
-In many React applications, components need to render links — but not every project uses the same routing system.
-For example:
-
-- One app might use react-router-dom, while another uses Next.js or Remix.
-- Some UI components might need to work without any router (e.g., in Storybook or documentation).
-- Design systems or shared component libraries might not require a hard dependency on any routing library.
-- Link logic may need to work seamlessly with server-side rendering (SSR) and theming solutions.
-
-This library solves these challenges by:
-
-1. Enabling injection of any link component at the top level of the application.
-2. Providing a simple hook that always returns the correct link component from context.
-3. Gracefully falling back to a standard anchor element when no router is used.
-
-This approach is ideal for shared UI libraries, SSR environments, and applications that require routing flexibility without coupling to a specific framework.
-
-## 📥 Installation
-
-Install the package using any preferred dependency management tool:
+## Installation
 
 ```bash
-# npm
 npm install react-link-provider
+```
 
-# or pnpm
-pnpm add react-link-provider
-
-# or yarn
+```bash
 yarn add react-link-provider
 ```
 
-## 🚀 Getting Started
-
-Wrap the application in `<LinkProvider>` and pass a `LinkComponent` — for example, from `react-router-dom`:
-
-```tsx
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { LinkProvider } from 'react-link-provider';
-import { BrowserRouter, Link as RouterLink } from 'react-router-dom';
-
-import App from './App.tsx';
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <LinkProvider LinkComponent={RouterLink}>
-        <App />
-      </LinkProvider>
-    </BrowserRouter>
-  </StrictMode>
-);
+```bash
+pnpm add react-link-provider
 ```
 
-Or a custom React component can be used as the link. This allows integration with design system links, styled anchor tags, or any other link component with a compatible props shape:
+## Getting Started
 
-```tsx
-import { ReactNode } from 'react';
+Register a link component at the root of the application.
 
-type CustomLinkProps = {
-  to: string;
-  children: ReactNode;
-  // Add any other props required by the design system
-};
+1. Choose a link component that accepts a `to` prop, such as the `Link` exported by [React Router](https://reactrouter.com/).
 
-export const CustomLink = ({ to, children, ...rest }: CustomLinkProps) => {
-  return (
-    <a
-      href={to}
-      style={{ color: 'red', textDecoration: 'underline' }}
-      {...rest}
-    >
-      {children}
-    </a>
-  );
-};
-```
+2. Wrap the application in `LinkProvider`, passing that component as `LinkComponent`:
 
-The custom component can then be provided via `<LinkProvider>`:
+   ```tsx
+   import { createRoot } from 'react-dom/client';
+   import { BrowserRouter, Link } from 'react-router-dom';
+   import { LinkProvider } from 'react-link-provider';
 
-```tsx
-<LinkProvider LinkComponent={CustomLink}>
-  <App />
-</LinkProvider>
-```
+   import App from './App';
 
-This setup works with any compatible React component, including routing library links, custom UI kit components, or simple styled anchor elements.
+   createRoot(document.getElementById('root')!).render(
+     <BrowserRouter>
+       <LinkProvider LinkComponent={Link}>
+         <App />
+       </LinkProvider>
+     </BrowserRouter>
+   );
+   ```
 
-## 📖 Usage
+## Usage
 
-The `useLink` hook provides access to the `LinkComponent` set in context. If no provider is defined, it falls back to a native `<a>` element.
+Components obtain the registered link component through a hook and render it with a `to` prop.
+
+### Rendering links
+
+`useLink` returns the `LinkComponent` from the nearest `LinkProvider`. Any additional props are passed through to that component.
 
 ```tsx
 import { useLink } from 'react-link-provider';
-import { Route, Routes } from 'react-router-dom';
 
-const Home = () => {
+const Navigation = () => {
   const Link = useLink();
 
   return (
-    <div>
-      <h1>Home</h1>
-      <Link to="/about">Go to About</Link>
-    </div>
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+    </nav>
   );
 };
-
-const About = () => {
-  const Link = useLink();
-
-  return (
-    <div>
-      <h1>About</h1>
-      <Link to="/">Back Home</Link>
-    </div>
-  );
-};
-
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-    </Routes>
-  );
-}
 ```
+
+### Using a custom link component
+
+Any React component with a compatible props shape can be provided, such as a design system link or a styled anchor.
+
+```tsx
+import type { ReactNode } from 'react';
+import { LinkProvider } from 'react-link-provider';
+
+type CustomLinkProps = { to: string; children?: ReactNode };
+
+const CustomLink = ({ to, children, ...rest }: CustomLinkProps) => (
+  <a href={to} className="link" {...rest}>
+    {children}
+  </a>
+);
+
+const Root = () => (
+  <LinkProvider LinkComponent={CustomLink}>
+    <App />
+  </LinkProvider>
+);
+```
+
+### Falling back without a provider
+
+Outside a `LinkProvider`, `useLink` returns a native anchor that renders `to` as its `href`, so components remain usable in isolation.
+
+```tsx
+import { useLink } from 'react-link-provider';
+
+const DocsLink = () => {
+  const Link = useLink();
+
+  // Renders <a href="/docs">Documentation</a> when no provider is present
+  return <Link to="/docs">Documentation</Link>;
+};
+```
+
+## License
+
+Licensed under the [MIT License](LICENSE).

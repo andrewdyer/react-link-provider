@@ -1,13 +1,17 @@
 {
   "name": "react-link-provider",
-  "description": "A lightweight utility for providing a consistent, framework-agnostic link component across React applications.",
+  "description": "A link component library for React applications that injects any router or custom link through context, with a native anchor fallback.",
   "version": "1.0.0",
   "keywords": [
+    "typescript",
     "react",
+    "react-dom",
     "link",
-    "provider",
+    "link-component",
     "router",
-    "typescript"
+    "routing",
+    "context",
+    "provider"
   ],
   "author": "Andrew Dyer (https://github.com/andrewdyer)",
   "license": "MIT",
