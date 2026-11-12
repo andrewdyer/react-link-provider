@@ -1,7 +1,7 @@
 {
   "name": "react-link-provider",
   "description": "A lightweight utility for providing a consistent, framework-agnostic link component across React applications.",
-  "version": "0.3.0-alpha.2",
+  "version": "1.0.0",
   "keywords": [
     "react",
     "link",
