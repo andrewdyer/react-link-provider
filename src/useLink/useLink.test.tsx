@@ -1,13 +1,11 @@
-import React from 'react';
-
 import { render, screen } from '@testing-library/react';
+import type { ReactNode } from 'react';
 
 import { LinkProvider } from '../LinkProvider';
-
 import useLink from './useLink';
 
 type DummyLinkProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   to: string;
 };
 
@@ -19,7 +17,7 @@ const DummyLink = ({ children, to }: DummyLinkProps) => (
 
 type TestComponentProps = {
   to: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const TestComponent = ({ to, children }: TestComponentProps) => {

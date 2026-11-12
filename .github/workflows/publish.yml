@@ -1,23 +1,58 @@
-name: Publish Package to npmjs
+name: Publish
 
 on:
-  release:
-    types: [published]
+  push:
+    tags: ['v*']
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
-  build:
+  publish:
+    name: Publish
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    timeout-minutes: 15
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v7
 
-      - name: Prepare repository
-        uses: andrewdyer/github-workflows/.github/actions/prepare-node@main
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
 
-      - name: Publish package
-        run: npm publish --provenance --access public
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify tag matches package version
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+
+          if [[ "$TAG" != "v$VERSION" ]]; then
+            echo "❌ Tag $TAG does not match package.json version $VERSION"
+            exit 1
+          fi
+
+      - name: Run typecheck
+        run: pnpm run typecheck
+
+      - name: Run unit tests
+        run: pnpm test
+
+      # Authenticates with npm trusted publishing (OIDC), so no npm token is
+      # needed. Provenance is generated automatically.
+      - name: Publish package to npm
+        run: pnpm publish --access public --no-git-checks

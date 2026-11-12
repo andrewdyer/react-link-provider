@@ -28,6 +28,7 @@
   "exclude": [
     "src/**/*.test.*",
     "src/**/*.spec.*",
+    "src/**/*.stories.*",
     "src/setupTests.ts",
     "node_modules",
     "dist"
