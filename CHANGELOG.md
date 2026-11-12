@@ -1,0 +1,12 @@
+# Changelog
+
+## [1.0.0](https://github.com/andrewdyer/react-link-provider/compare/v0.3.0-alpha.2...v1.0.0) (2026-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* react and react-dom 19.2 or later are now required and the CommonJS and UMD builds have been removed.
+
+### Miscellaneous Chores
+
+* align with template v3.0.1 ([#4](https://github.com/andrewdyer/react-link-provider/issues/4)) ([a800dfb](https://github.com/andrewdyer/react-link-provider/commit/a800dfbe01569f1437641fac8bc763f1c9ae7010))
