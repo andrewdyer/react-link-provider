@@ -1,7 +1,7 @@
-/// <reference types="vitest" />
-import { defineConfig } from 'vite';
+/// <reference types="vitest/config" />
+
 import react from '@vitejs/plugin-react-swc';
-import * as path from 'path';
+import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
@@ -19,32 +19,43 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'ReactLinkProvider',
-      fileName: (format) => `index.${format}.js`,
-      formats: ['es', 'cjs', 'umd'],
+      entry: 'src/index.ts',
+      formats: ['es'],
+      fileName: () => 'index.js',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
     },
   },
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['src/setupTests.ts'],
-    include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    setupFiles: 'src/setupTests.ts',
+    include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     typecheck: {
       tsconfig: './tsconfig.test.json',
     },
     coverage: {
-      reportsDirectory: 'coverage',
+      include: ['src/**/*.{ts,tsx}'],
       provider: 'v8',
+      reporter: ['text', 'lcov', 'html'],
+      reportsDirectory: 'coverage',
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
+      exclude: [
+        '**/{.turbo,coverage,dist,node_modules}/**',
+        'src/**/*.d.ts',
+        'src/**/index.{js,jsx,ts,tsx}',
+        'src/**/*.{test,spec}.{js,jsx,ts,tsx}',
+        'src/**/*.stories.{ts,tsx}',
+        'src/**/*.mock.{js,ts}',
+        '**/{vite,eslint}.config.{js,ts}',
+        'src/setupTests.ts',
+      ],
     },
   },
 });

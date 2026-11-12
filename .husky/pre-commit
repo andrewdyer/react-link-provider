@@ -1,4 +1,2 @@
-npm run format && \
-npm run lint && \
-npm run type-check && \
-npm test
+echo "Running lint-staged..."
+pnpm exec lint-staged

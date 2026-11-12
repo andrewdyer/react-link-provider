@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /build
+/storybook-static
 
 # Logs
 logs
@@ -11,6 +12,7 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+*storybook.log
 
 # OS
 .DS_Store
