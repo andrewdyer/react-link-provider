@@ -1,7 +1,7 @@
 {
   "name": "react-link-provider",
   "description": "A link component library for React applications that injects any router or custom link through context, with a native anchor fallback.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "typescript",
     "react",
