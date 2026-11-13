@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/andrewdyer/react-link-provider/compare/v1.0.0...v1.0.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* bundle type declarations so nodenext consumers resolve them ([22ab896](https://github.com/andrewdyer/react-link-provider/commit/22ab896e76306dd8312d8f3d245a32ce1cf98b3f))
+
 ## [1.0.0](https://github.com/andrewdyer/react-link-provider/compare/v0.3.0-alpha.2...v1.0.0) (2026-11-12)
 
 
